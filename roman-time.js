@@ -2,20 +2,44 @@ var hours = process.argv[2];
 var minutes = process.argv[3];
 
 // Немного замечательного кода и магии
-if(((hours<0 || hours>23) || (minutes<0 || minutes>59)) || ((isNaN(hours)) || (isNaN(minutes))))
-    console.log('Время указано не верно');
-else {
-
-    var decades=['-','X','XX','XXX','XL','L'];
-    var ones=[' ','I','II','III','IV','V','VI','VII','VIII','IX'];
-    var romeHour=[decades[Math.floor(hours/10)],ones[hours%10],':',decades[Math.floor(minutes/10)],ones[minutes%10]];
-    console.log(romeHour[0]+romeHour[1]+romeHour[2]+romeHour[3]+romeHour[4]);
-    for (var i=0;i<8;i++) {
-        console.log(romeToAscii(romeHour[0])[i]+(romeToAscii(romeHour[1])[i])+(romeToAscii(romeHour[2])[i])+
-            (romeToAscii(romeHour[3])[i])+(romeToAscii(romeHour[4])[i]));
-    }
+function isCorrectTime(a,b) {
+    return (((a) < 0 || (a) > 23) || ((b) < 0 || (b) > 59) || ((isNaN(hours)) || (isNaN(minutes))))
 }
 
+    if (!(isCorrectTime(hours,minutes))) {
+        var decades = [' ', 'X', 'XX', 'XXX', 'XL', 'L'];
+        var ones = [' ', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+        var romeHour1, romeHour2, romeMinut1, romeMinut2;
+
+        if (hours == 0) {
+            romeHour1 = '-';
+            romeHour2 = '-';
+        }
+        else {
+            romeHour1 = decades[Math.floor(hours / 10)];
+            romeHour2 = ones[hours % 10];
+        }
+        var razdelitel = ':';
+        if (minutes === '00') {
+            romeMinut1 = '-';
+            romeMinut2 = '-';
+        }
+        else {
+            romeMinut1 = decades[Math.floor(minutes / 10)];
+            romeMinut2 = ones[minutes % 10];
+        }
+
+        var v = 8;                                       //высота римской цифры в ascii графикe
+        console.log(romeHour1 + romeHour2 + razdelitel + romeMinut1 + romeMinut2);
+        for (var i = 0; i < v; i++) {
+            console.log((romeToAscii(romeHour1)[i]) + (romeToAscii(romeHour2)[i]) + (romeToAscii(razdelitel)[i]) +
+                (romeToAscii(romeMinut1)[i]) + (romeToAscii(romeMinut2)[i]));
+        }
+    }
+    else  {
+        console.log('Время указано не верно');
+    }
+    
  function romeToAscii (a) {
      switch(a) {
          case ':': return [
