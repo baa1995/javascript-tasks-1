@@ -2,10 +2,12 @@ var hours = process.argv[2];
 var minutes = process.argv[3];
 
 // Немного замечательного кода и магии
+hours=parseInt(hours,10);
+minutes=parseInt(minutes,10);
+
 function isCorrectTime(hours,minutes) {
 
-    return parseInt(hours,10) < 0 || parseInt(hours,10) > 23 ||parseInt(minutes,10) < 0 ||parseInt(minutes,10) > 59
-        || isNaN(hours) || isNaN(minutes);
+    return hours < 0 || hours > 23 || minutes < 0 ||minutes > 59 || isNaN(hours) || isNaN(minutes);
 
 }
 
