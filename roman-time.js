@@ -2,11 +2,14 @@ var hours = process.argv[2];
 var minutes = process.argv[3];
 
 // Немного замечательного кода и магии
-function isCorrectTime(a,b) {
-    return (((a) < 0 || (a) > 23) || ((b) < 0 || (b) > 59) || ((isNaN(hours)) || (isNaN(minutes))))
+function isCorrectTime(hours,minutes) {
+
+    return parseInt(hours,10) < 0 || parseInt(hours,10) > 23 ||parseInt(minutes,10) < 0 ||parseInt(minutes,10) > 59
+        || isNaN(hours) || isNaN(minutes);
+
 }
 
-    if (!(isCorrectTime(hours,minutes))) {
+    if (!isCorrectTime(hours,minutes)) {
         var decades = [' ', 'X', 'XX', 'XXX', 'XL', 'L'];
         var ones = [' ', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
         var romeHour1, romeHour2, romeMinut1, romeMinut2;
@@ -32,13 +35,14 @@ function isCorrectTime(a,b) {
         var v = 8;                                       //высота римской цифры в ascii графикe
         console.log(romeHour1 + romeHour2 + razdelitel + romeMinut1 + romeMinut2);
         for (var i = 0; i < v; i++) {
-            console.log((romeToAscii(romeHour1)[i]) + (romeToAscii(romeHour2)[i]) + (romeToAscii(razdelitel)[i]) +
-                (romeToAscii(romeMinut1)[i]) + (romeToAscii(romeMinut2)[i]));
+            console.log(romeToAscii(romeHour1)[i] + romeToAscii(romeHour2)[i] + romeToAscii(razdelitel)[i] +
+                romeToAscii(romeMinut1)[i] + romeToAscii(romeMinut2)[i]);
         }
     }
     else  {
         console.log('Время указано не верно');
     }
+
     
  function romeToAscii (a) {
      switch(a) {
